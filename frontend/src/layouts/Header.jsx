@@ -1,7 +1,17 @@
 import { IconChevronDown } from "@tabler/icons-react";
-import { Burger, Center, Container, Group, Menu, Title } from "@mantine/core";
+import {
+  Burger,
+  Center,
+  Container,
+  Group,
+  Image,
+  Menu,
+  Title,
+} from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import classes from "./Header.module.css";
+import { useBrandData } from "../hooks/useBrandData";
+import { pb } from "../App";
 
 const links = [
   { link: "/about", label: "Features" },
@@ -30,6 +40,7 @@ const links = [
 
 export const Header = () => {
   const [opened, { toggle }] = useDisclosure(false);
+  const brandData = useBrandData();
 
   const items = links.map((link) => {
     const menuItems = link.links?.map((item) => (
@@ -77,7 +88,7 @@ export const Header = () => {
     <header className={classes.header}>
       <Container size="md">
         <div className={classes.inner}>
-          <Title order={4}>LOGO</Title>
+          <Image src={pb.files.getURL(brandData, brandData.logo)} width={150} />
           <Group gap={5} visibleFrom="sm">
             {items}
           </Group>
